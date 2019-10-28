@@ -15,7 +15,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 nlp = spacy.load('pt_core_news_sm')  # Carregando os modelos para lematização na língua portuguesa
 
 nltk.download('stopwords')  # Depois que baixo, não é mais necessário executar essa linha
-stop_words = stopwords.words('portuguese')  # Carregando o dicionário de stopword do NLTK da língua inglesa
+stop_words = stopwords.words('portuguese')  # Carregando o dicionário de stopword do NLTK da língua portuguesa
 # Acrescentando mais palavras no dicionário de stopword
 stop_words.extend(['ir', 'aqui', 'ter', 'todo', 'fazer', 'dizer', 'falar', 'estar', 'hoje', 'algum', 'outro', 'ser',
                    'querer', 'qualquer', 'nado', 'porque', 'vir', 'partir', 'governar', 'deputar', 'parlamentar', 'sr',
@@ -24,9 +24,9 @@ stop_words.extend(['ir', 'aqui', 'ter', 'todo', 'fazer', 'dizer', 'falar', 'esta
 
 
 # Functions
-def tokenization(texts):
-    for word in texts:
-        yield (gensim.utils.simple_preprocess(str(word), deacc=False))
+def tokenization(texts_list):
+    for text in texts_list:
+        yield (gensim.utils.simple_preprocess(str(text), deacc=False))
 
 
 def remove_stopwords(matrix):
@@ -60,7 +60,7 @@ def show_keyword_freq(dic, corp, i):
 
 
 df = pd.read_json('Arquivos json/KimKataguiri 2019.json', encoding="utf8")
-database = df.content.values.tolist()  # Converte o texto em uma lista
+database = df.discursos.values.tolist()  # Converte o texto em uma lista
 
 data_processing = list(tokenization(database))  # Converte em matriz, remove números, pontuação e letras isoladas
 
