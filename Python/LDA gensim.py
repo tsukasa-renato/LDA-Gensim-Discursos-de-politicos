@@ -59,7 +59,7 @@ def show_keyword_freq(dic, corp, i):
     return [[(dic[n], freq) for n, freq in cp] for cp in corp[:i]]
 
 
-df = pd.read_json('Arquivos json/KimKataguiri 2019.json', encoding="utf8")
+df = pd.read_json('Arquivos json/Joice Hasselmann Plenario 2019.json', encoding="utf8")
 database = df.discursos.values.tolist()  # Converte o texto em uma lista
 
 data_processing = list(tokenization(database))  # Converte em matriz, remove números, pontuação e letras isoladas
@@ -79,10 +79,10 @@ data_processing = remove_stopwords(data_processing)
 dictionary = create_dictionary(data_processing)  # Atribui um id para cada palavra
 
 print(len(dictionary))
-dictionary.filter_extremes(no_below=2)  # mantem as palavras que estão presente em pelo menos 2 documentos
+dictionary.filter_extremes(no_below=2)  # remove as palavras que aparecerem em menos de 2 documentos
 print(len(dictionary))
 
-corpus = create_corpus(dictionary, data_processing)  # Pega a frequência de cada palavra
+corpus = create_corpus(dictionary, data_processing)  # Cria corpus
 
 # Criação do modelo LDA
 lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=dictionary, num_topics=5, passes=10,
