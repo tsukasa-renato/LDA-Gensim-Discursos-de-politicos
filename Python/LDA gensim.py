@@ -20,7 +20,10 @@ stop_words = stopwords.words('portuguese')  # Carregando o dicionário de stopwo
 stop_words.extend(['ir', 'aqui', 'ter', 'todo', 'fazer', 'dizer', 'falar', 'estar', 'hoje', 'algum', 'outro', 'ser',
                    'querer', 'qualquer', 'nado', 'porque', 'vir', 'partir', 'governar', 'deputar', 'parlamentar', 'sr',
                    'presidente', 'vice', 'discursar', 'parecer', 'vez', 'dar', 'ex', 'sim', 'levar', 'quase', 'chance',
-                   'ano', 'além', 'sob', 'termo', 'sempre', 'nenhum', 'coisa', 'frase', 'diverso'])
+                   'ano', 'além', 'sob', 'termo', 'sempre', 'nenhum', 'coisa', 'frase', 'diverso', 'olhar', 'exas',
+                   'aliás', 'ficar', 'tanto', 'saber', 'colocar', 'tão', 'dia', 'senhor', 'então', 'tipo', 'lado',
+                   'palavra', 'gente', 'apresentar', 'continuar', 'lá', 'nº', 'nome', 'exª', 'ali', 'câmara',
+                   'comissão'])
 
 
 # Functions
@@ -85,7 +88,7 @@ print(len(dictionary))
 corpus = create_corpus(dictionary, data_processing)  # Cria corpus
 
 # Criação do modelo LDA
-lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=dictionary, num_topics=5, passes=10,
+lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus, id2word=dictionary, num_topics=5, passes=200,
                                             random_state=100, chunksize=5)
 
 pprint(lda_model.show_topics(num_words=10, formatted=False))
